@@ -14,7 +14,7 @@ public class MatrixClient {
 		int[] m = new int[rows * rows];
 		for (int i = 0; i < rows; i++)
 			for (int j=0; j < rows; j++)
-				m[i + (j * rows)] = r.nextInt(10);
+				m[i + (j * rows)] = r.nextInt(2);
 		return m;
 	}
 
@@ -26,7 +26,9 @@ public class MatrixClient {
 			System.err.println("Connected to server.");
 			
 			int m[] = generateMatrix(3);
+			
 			int ret[] = mserver.addMatrix(m, 3);
+			System.out.println("Sent to server: \n" + prettyPrintMatrix(m, 3));
 			if (ret == null) {
 				System.out.println("Server waiting for second matrix...");
 			} else {
@@ -40,7 +42,18 @@ public class MatrixClient {
 		}
 
 	}
-	
+	private String prettyPrintMatrix(int[] m, int rows) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < rows; i++) {
+			sb.append("[");
+			for (int j = 0; j < m.length/rows; j++)
+				sb.append(m[j + (i * rows)] + " ");
+			sb.append("]");
+			sb.append(System.getProperty("line.separator"));		
+		}
+		
+		return sb.toString();
+	}
 	public static void main(String args0[]) {
 		new MatrixClient();
 	}
