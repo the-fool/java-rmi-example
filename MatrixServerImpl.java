@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 public class MatrixServerImpl extends UnicastRemoteObject implements MatrixServerIntf {
-	boolean receivedMatrix;
 	int[] firstMatrix;
 	
 	protected MatrixServerImpl() throws RemoteException {
@@ -30,9 +29,12 @@ public class MatrixServerImpl extends UnicastRemoteObject implements MatrixServe
 		if (firstMatrix == null) {
 			firstMatrix = m;
 			System.out.println("Received Matrix A: " + firstMatrix);
-			
-		}
-		return null;
+			return null;
+		} 
+		System.out.println("Received Matrix B:" + m);
+		for (int i = 0; i < m.length; i++)
+			m[i] = m[i] = firstMatrix[i];
+		return m;
 	}
 
 }
