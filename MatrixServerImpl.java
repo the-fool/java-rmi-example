@@ -33,8 +33,11 @@ public class MatrixServerImpl extends UnicastRemoteObject implements MatrixServe
 		} 
 		System.out.println("Received Matrix B: \n" + prettyPrintMatrix(m, rows));
 		for (int i = 0; i < m.length; i++)
-			m[i] = m[i] = firstMatrix[i];
+			m[i] = m[i] + firstMatrix[i];
 		System.out.println("Summed Matrix: \n" + prettyPrintMatrix(m, rows));
+		
+		// reset
+		firstMatrix = null;
 		return m;
 	}
 	
